@@ -1,0 +1,89 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+body{
+    font-family: "Arial",verdana;
+}
+
+
+
+
+
+header{
+    box-sizing: border-box;
+    width: 100%;
+    background: #2c3e50;
+    padding: 2px;
+    padding: 1% 1%;
+    color: #fff;
+}
+header .titulo{
+    display:inline-block;
+}
+nav{
+    
+    margin-right: 150px;
+    float: right;
+    float: above;
+    
+
+    
+}
+nav li{
+    display: inline;
+}
+nav ul li a{
+    display: inline;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 17px;
+    font-weight: bold;
+}
+nav ul li a span {
+    font-size: 17px;
+}
+nav ul li a:hover{
+    background: #EFEFFB;
+    color:#000;
+}
+#nav-perfil{
+    visibility: hidden;
+    width: 135px;
+    background-color: #fff;
+    top:40px;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 1;
+    
+}
+#nav-perfil li a{
+    color:#2c3e50;
+}
+#nav-perfil li{
+    list-style:none;
+    display: inline;
+}
+#nav-perfil li a:hover{
+    background: #2c3e50;
+    color: #fff;
+}
+#nav-perfil::after{
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+}
+header nav .info_usuario:hover #nav-perfil{
+    visibility: visible;
+}
