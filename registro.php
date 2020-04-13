@@ -35,7 +35,7 @@
       
        <input type="password" name="password" class="input-control"  placeholder="Contraseña:">
 
-       <input type="hidden" name="id_rol" value="0">
+       <input type="hidden" name="id_rol" value="1">
        
        <input type="submit" value="Registrar"  name="registrar" class="log-btn">
        </form>
