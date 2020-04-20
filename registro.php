@@ -2,11 +2,11 @@
   require_once('conexion.php');
 
  if(!empty($_POST)){  //valida que el formulario tenga datos
-     $nombre = $_POST['nombre']; // obtiene dato ingresado en el campo usuario del formulario  
+     $nombre = $_POST['nombre']; // obtiene dato ingresado en el campo   
      $correo = $_POST['correo'];  // obtiene dato ingresado en el campo correo del formulario  
      $pass = $_POST['password']; // obtiene dato ingresado en el contraseña usuario del formulario  
      $rol = $_POST['id_rol'];
-     $queryUser = "INSERT INTO usuario (nombre,correo,password,id_rol) VALUES('$nombre','$correo', '$pass','$rol')";  //query para registrar 
+     $queryUser = "INSERT INTO usuario (nombre,correo,password,id_rol,activo,dias) VALUES('$nombre','$correo', '$pass','$rol','1','0')";  //query para registrar 
      $conn->exec($queryUser); //ejecuta query
      
      header('Location: login.php');  // despues de registrar redirecciona a login.php

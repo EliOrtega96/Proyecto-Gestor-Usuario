@@ -11,8 +11,8 @@
         
        if($result>0){ //si el resultado del query anterior es >0 (que el usuario y contraseña ingresados en el formulario login.php existan) entonces hace lo siguiente.
             session_start(); //crea una sesion
-           $_SESSION['id']=$result['id'];  // se asigna a la variable $_SESSION['id'] el id de la persona que se loguea
-            $_SESSION['nombre']=$result['nombre']; // se asigna a la variable $_SESSION['id'] el usuario de la persona que se loguea
+           $_SESSION['id_usuario']=$result['id_usuario'];  // se asigna a la variable $_SESSION['id'] el id de la persona que se loguea
+            $_SESSION['nombre']=$result['nombre']; // 
             $_SESSION['correo']=$result['correo'];// se asigna a la variable $_SESSION['correo'] el correo de la persona que se loguea
                header('Location: index.php'); //redirecciona a index.php
         }

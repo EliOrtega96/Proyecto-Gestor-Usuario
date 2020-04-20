@@ -8,10 +8,6 @@ body{
     font-family: "Arial",verdana;
 }
 
-
-
-
-
 header{
     box-sizing: border-box;
     width: 100%;
@@ -59,7 +55,7 @@ nav ul li a:hover{
     text-align: center;
     padding: 5px 0;
     border-radius: 6px;
-    position: absolute;
+     position: absolute;
     z-index: 1;
     
 }
@@ -87,3 +83,4 @@ nav ul li a:hover{
 header nav .info_usuario:hover #nav-perfil{
     visibility: visible;
 }
+
