@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-04-2020 a las 22:40:05
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.3.2
+-- Tiempo de generación: 21-04-2020 a las 05:48:19
+-- Versión del servidor: 10.1.26-MariaDB
+-- Versión de PHP: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `gestorusuario`
+-- Base de datos: `prue`
 --
 
 -- --------------------------------------------------------
@@ -32,13 +32,6 @@ CREATE TABLE `categoria` (
   `id_categoria` int(11) NOT NULL,
   `titulo` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `categoria`
---
-
-INSERT INTO `categoria` (`id_categoria`, `titulo`) VALUES
-(4, 'FCC');
 
 -- --------------------------------------------------------
 
@@ -66,7 +59,6 @@ CREATE TABLE `publicacion` (
   `texto` text COLLATE utf8_bin NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
-  `id_reaccion` int(11) NOT NULL,
   `id_valoracion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -78,7 +70,9 @@ CREATE TABLE `publicacion` (
 
 CREATE TABLE `reaccion` (
   `id_reaccion` int(11) NOT NULL,
-  `descripcion` varchar(35) COLLATE utf8_bin NOT NULL
+  `descripcion` varchar(35) COLLATE utf8_bin NOT NULL,
+  `id_publicacion` int(11) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -98,9 +92,9 @@ CREATE TABLE `rol` (
 
 INSERT INTO `rol` (`id_rol`, `rol`) VALUES
 (1, 'usuario'),
-(2, 'administrador'),
-(3, 'moderador'),
-(4, 'request');
+(2, 'Admin'),
+(3, 'Moderador'),
+(4, 'Request');
 
 -- --------------------------------------------------------
 
@@ -118,13 +112,6 @@ CREATE TABLE `usuario` (
   `id_rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`id_usuario`, `nombre`, `correo`, `password`, `activo`, `dias`, `id_rol`) VALUES
-(6, 'Elizabeth', 'user@example.com', '123', 1, 0, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -141,8 +128,8 @@ CREATE TABLE `valoracion` (
 --
 
 INSERT INTO `valoracion` (`id_valoracion`, `valoracion`) VALUES
-(1, 'aprobado'),
-(2, 'rechazado');
+(0, 'Rechazada'),
+(1, 'Aprobada');
 
 --
 -- Índices para tablas volcadas
@@ -166,16 +153,16 @@ ALTER TABLE `notificacion`
 --
 ALTER TABLE `publicacion`
   ADD PRIMARY KEY (`id_publicacion`),
+  ADD KEY `id_valoracion` (`id_valoracion`),
   ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_categoria` (`id_categoria`),
-  ADD KEY `id_reaccion` (`id_reaccion`),
-  ADD KEY `id_valoracion` (`id_valoracion`);
+  ADD KEY `id_categoria` (`id_categoria`);
 
 --
 -- Indices de la tabla `reaccion`
 --
 ALTER TABLE `reaccion`
-  ADD PRIMARY KEY (`id_reaccion`);
+  ADD PRIMARY KEY (`id_reaccion`),
+  ADD KEY `id_publicacion` (`id_publicacion`);
 
 --
 -- Indices de la tabla `rol`
@@ -204,44 +191,27 @@ ALTER TABLE `valoracion`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
   MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
   MODIFY `id_publicacion` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `reaccion`
 --
 ALTER TABLE `reaccion`
-  MODIFY `id_reaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `rol`
---
-ALTER TABLE `rol`
-  MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id_reaccion` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de la tabla `valoracion`
---
-ALTER TABLE `valoracion`
-  MODIFY `id_valoracion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restricciones para tablas volcadas
 --
@@ -256,11 +226,15 @@ ALTER TABLE `notificacion`
 -- Filtros para la tabla `publicacion`
 --
 ALTER TABLE `publicacion`
-  ADD CONSTRAINT `publicacion_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE,
+  ADD CONSTRAINT `publicacion_ibfk_1` FOREIGN KEY (`id_valoracion`) REFERENCES `valoracion` (`id_valoracion`) ON DELETE CASCADE,
   ADD CONSTRAINT `publicacion_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE,
-  ADD CONSTRAINT `publicacion_ibfk_3` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE CASCADE,
-  ADD CONSTRAINT `publicacion_ibfk_4` FOREIGN KEY (`id_reaccion`) REFERENCES `reaccion` (`id_reaccion`),
-  ADD CONSTRAINT `publicacion_ibfk_5` FOREIGN KEY (`id_valoracion`) REFERENCES `valoracion` (`id_valoracion`);
+  ADD CONSTRAINT `publicacion_ibfk_3` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `reaccion`
+--
+ALTER TABLE `reaccion`
+  ADD CONSTRAINT `reaccion_ibfk_1` FOREIGN KEY (`id_publicacion`) REFERENCES `publicacion` (`id_publicacion`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `usuario`
