@@ -84,3 +84,77 @@ header nav .info_usuario:hover #nav-perfil{
     visibility: visible;
 }
 
+/*CAMBIOS GERARDO*/
+.ventana{
+    background: #2c3e50;
+    width: 20%;
+    height: auto;
+    color:white;
+    font-size: 20px;
+    text-align:center;
+    padding:30px;
+    min-width: 250px;
+    border-radius: 10px;
+    position:absolute;
+    left:62%;
+    top:12%;
+    display:none;
+  }
+
+  .ventana::after{
+    content: " ";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;]
+}
+  #cerrar{
+    position:absolute;
+    right:3px;
+    top:1px;
+  }
+
+  .mensaje{
+    color:black;
+    background: white;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    position:relative;
+    visibility: visible;
+  }
+  .mensaje:hover{
+    background:white;
+    opacity: .9;
+  }
+
+
+  .fechayhora {
+    font-size: 12px;
+    text-align: left;
+    float:right;
+    margin:2px 10px 0px;
+  }
+  .emisor{
+    font-weight:bold;
+    margin:0px px 0px;
+    font-size: 18px;
+  }
+.contenido{
+    font-weight: inherit;
+    margin:0px 20px 0px;
+  }
+  .estado{
+      font-size:12px;
+      font-weight: lighter;
+      text-align:left;
+      margin:0px 5px;
+  }
+  .borrar{
+      float:right;
+  }
+
+  /*TERMINA CAMBIOS */
