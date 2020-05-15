@@ -1,7 +1,12 @@
 <?php
-    Session_start();
+    session_start();
     //CAMBIOS GERARDO
     require("conexion.php");
+     //CAMBIOS ISABEL
+    if(!isset($_SESSION['logueado']) && $_SESSION['logueado'] == FALSE) {
+          header("Location: login.php");
+    }
+    //TERMINA CAMBIOS ISABEL
     $obtienemsj = $conn->prepare("SELECT mensajes.fechayhora, mensajes.id_emisor, mensajes.mensaje, usuario.nombre FROM mensajes inner join usuario WHERE id_receptor=$_SESSION[id_usuario] && mensajes.id_emisor=usuario.id_usuario ORDER BY fechayhora DESC") ; //query para obtener usuario con correo y contraseña ingresados en formulario login.php
     $sqlcount=$conn->prepare("SELECT count(*) FROM mensajes");
     $obtienemsj->execute();
@@ -16,8 +21,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="icomoon/style.css">
+        <link rel="stylesheet" href="css/style.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -26,6 +31,9 @@
         <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+         <!-- CAMBIOS ISABEL-->
+        <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <!-- TERMINA CAMBIOS -->
     </head>
     <body>
         <!--CAMBIOS GERARDO-->

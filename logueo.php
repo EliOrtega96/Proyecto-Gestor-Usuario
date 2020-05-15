@@ -14,7 +14,31 @@
            $_SESSION['id_usuario']=$result['id_usuario'];  // se asigna a la variable $_SESSION['id'] el id de la persona que se loguea
             $_SESSION['nombre']=$result['nombre']; // 
             $_SESSION['correo']=$result['correo'];// se asigna a la variable $_SESSION['correo'] el correo de la persona que se loguea
-               header('Location: index.php'); //redirecciona a index.php
+            
+            //CAMBIOS ISABEL
+            $_SESSION['logueado'] = TRUE;
+            $_SESSION['rol'] = $result['id_rol']; //se asigna el rol con el que inicia session
+
+            switch($_SESSION['rol']){
+                case 1:
+                    header('location: registrado.php');
+                break;
+    
+                case 2: 
+                    header('location: admin.php');
+                break;
+    
+                case 3:
+                    header('location: moderador.php');
+                break;
+    
+                case 4:
+                    header('Location: invitado.php'); //redirecciona a index.php
+                break;
+    
+                default:
+            }
+            //TERMNA CAMBIOS ISABEL
         }
           else{ //si el correo y contraseña ingresados en el formulario de login.php no son validos hace lo siguiente
             $md5=MD5($pass); 
