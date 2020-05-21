@@ -2,10 +2,10 @@
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 14-05-2020 a las 19:35:31
--- Versión del servidor: 5.7.26
--- Versión de PHP: 7.2.18
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 21-05-2020 a las 06:05:20
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,29 +28,26 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `archivos`
 --
 
-DROP TABLE IF EXISTS `archivos`;
-CREATE TABLE IF NOT EXISTS `archivos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `archivos` (
+  `id` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   `ruta` varchar(100) NOT NULL,
   `tipo` varchar(50) NOT NULL,
   `size` int(50) NOT NULL,
   `publicacion` int(11) NOT NULL,
-  `fecha` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+  `fecha` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `archivos`
 --
 
 INSERT INTO `archivos` (`id`, `user`, `ruta`, `tipo`, `size`, `publicacion`, `fecha`) VALUES
-(28, 1, 'ID-28-NAME-6073CC.jpg', 'image/jpeg', 86731, 39, '2020-05-12 02:49:13'),
-(29, 1, 'ID-29-NAME-159764.jpg', 'image/jpeg', 86731, 40, '2020-05-13 18:11:28'),
-(31, 1, 'ID-31-NAME-E78AA9.jpg', 'image/jpeg', 92000, 42, '2020-05-13 22:46:24'),
-(32, 1, 'ID-32-NAME-7D5A2C.jpg', 'image/jpeg', 75654, 43, '2020-05-13 23:12:09'),
-(33, 1, 'ID-33-NAME-73E0EF.jpg', 'image/jpeg', 86731, 44, '2020-05-14 19:19:55'),
-(34, 1, 'ID-34-NAME-6F4F3F.jpg', 'image/jpeg', 75654, 45, '2020-05-14 19:20:59');
+(37, 5, 'ID-37-NAME-A19511.jpg', 'image/jpeg', 69884, 50, '2020-05-21 04:38:32'),
+(38, 5, 'ID-38-NAME-843F07.jpg', 'image/jpeg', 26495, 51, '2020-05-21 04:46:19'),
+(39, 5, 'ID-39-NAME-7C792B.jpg', 'image/jpeg', 70729, 52, '2020-05-21 04:57:06'),
+(40, 4, 'ID-40-NAME-9C093E.jpg', 'image/jpeg', 70090, 53, '2020-05-21 05:09:54'),
+(41, 4, 'ID-41-NAME-6125CF.jpg', 'image/jpeg', 45462, 54, '2020-05-21 05:18:12');
 
 -- --------------------------------------------------------
 
@@ -58,20 +55,21 @@ INSERT INTO `archivos` (`id`, `user`, `ruta`, `tipo`, `size`, `publicacion`, `fe
 -- Estructura de tabla para la tabla `categoria`
 --
 
-DROP TABLE IF EXISTS `categoria`;
-CREATE TABLE IF NOT EXISTS `categoria` (
-  `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
-  `titulo` varchar(45) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+CREATE TABLE `categoria` (
+  `id_categoria` int(11) NOT NULL,
+  `titulo` varchar(45) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
 INSERT INTO `categoria` (`id_categoria`, `titulo`) VALUES
-(1, 'escolar'),
-(2, 'secretaria');
+(3, 'Salud'),
+(8, 'Deportes'),
+(9, 'Memes'),
+(10, 'Educacion'),
+(11, 'Tecnologia');
 
 -- --------------------------------------------------------
 
@@ -79,14 +77,12 @@ INSERT INTO `categoria` (`id_categoria`, `titulo`) VALUES
 -- Estructura de tabla para la tabla `mensajes`
 --
 
-DROP TABLE IF EXISTS `mensajes`;
-CREATE TABLE IF NOT EXISTS `mensajes` (
-  `folio` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `mensajes` (
+  `folio` int(11) NOT NULL,
   `id_emisor` varchar(20) NOT NULL,
   `id_receptor` varchar(20) NOT NULL,
   `mensaje` varchar(30) NOT NULL,
-  `fechayhora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`folio`)
+  `fechayhora` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -95,14 +91,11 @@ CREATE TABLE IF NOT EXISTS `mensajes` (
 -- Estructura de tabla para la tabla `notificacion`
 --
 
-DROP TABLE IF EXISTS `notificacion`;
-CREATE TABLE IF NOT EXISTS `notificacion` (
-  `id_notificacion` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `notificacion` (
+  `id_notificacion` int(11) NOT NULL,
   `asunto` varchar(150) COLLATE utf8_bin NOT NULL,
   `descripcion` text COLLATE utf8_bin NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  PRIMARY KEY (`id_notificacion`),
-  KEY `id_usuario` (`id_usuario`)
+  `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -111,33 +104,31 @@ CREATE TABLE IF NOT EXISTS `notificacion` (
 -- Estructura de tabla para la tabla `publicacion`
 --
 
-DROP TABLE IF EXISTS `publicacion`;
-CREATE TABLE IF NOT EXISTS `publicacion` (
-  `id_publicacion` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `publicacion` (
+  `id_publicacion` int(11) NOT NULL,
   `titulo` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   `categoria` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `foto` int(11) NOT NULL,
   `texto` text COLLATE utf8_bin NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `id_categoria` int(11) DEFAULT NULL,
+  `id_categoria` int(11) NOT NULL,
   `bien` int(11) NOT NULL,
   `regular` int(11) NOT NULL,
   `mal` int(11) NOT NULL,
-  `id_valoracion` int(11) DEFAULT NULL,
-  `fecha` datetime NOT NULL,
-  PRIMARY KEY (`id_publicacion`),
-  KEY `id_valoracion` (`id_valoracion`),
-  KEY `id_usuario` (`id_usuario`),
-  KEY `id_categoria` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `id_valoracion` int(11) NOT NULL,
+  `fecha` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `publicacion`
 --
 
 INSERT INTO `publicacion` (`id_publicacion`, `titulo`, `categoria`, `foto`, `texto`, `id_usuario`, `id_categoria`, `bien`, `regular`, `mal`, `id_valoracion`, `fecha`) VALUES
-(44, '\'sss\'', '\'secretaria\'', 0, '\'sss\'', 1, NULL, 0, 0, 0, NULL, '2020-05-14 19:19:55'),
-(45, '\'dd\'', '\'escolar\'', 0, '\'dd\'', 1, NULL, 0, 0, 0, NULL, '2020-05-14 19:20:59');
+(50, '\'Meme del dia\'', 'Memes', 0, '\'Â¡un poco de humor !\'', 5, 9, 0, 0, 0, 2, '2020-05-21 04:38:32'),
+(51, '\'Manzanita :)\'', 'Memes', 0, '\'Â¿De que color ves la manzana?\'', 5, 9, 0, 0, 0, 1, '2020-05-21 04:46:19'),
+(52, '\'Mexico!\'', 'Memes', 0, '\'#Encasa\'', 5, 9, 0, 0, 0, 1, '2020-05-21 04:57:06'),
+(53, '\'Curso de hacking \'', 'Educacion', 0, '\'Aprovechen este curso en linea\'', 4, 10, 0, 0, 0, 1, '2020-05-21 05:09:54'),
+(54, '\'Efectos del EstrÃ©s\'', 'Salud', 0, '\'Informate!\'', 4, 3, 0, 0, 0, 1, '2020-05-21 05:18:12');
 
 -- --------------------------------------------------------
 
@@ -145,16 +136,13 @@ INSERT INTO `publicacion` (`id_publicacion`, `titulo`, `categoria`, `foto`, `tex
 -- Estructura de tabla para la tabla `reaccion`
 --
 
-DROP TABLE IF EXISTS `reaccion`;
-CREATE TABLE IF NOT EXISTS `reaccion` (
-  `id_reaccion` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `reaccion` (
+  `id_reaccion` int(11) NOT NULL,
   `tipo` int(11) NOT NULL,
   `id_publicacion` int(11) DEFAULT NULL,
   `id_usuario` int(11) DEFAULT NULL,
-  `fecha` datetime NOT NULL,
-  PRIMARY KEY (`id_reaccion`),
-  KEY `id_publicacion` (`id_publicacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=728 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `fecha` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -162,11 +150,9 @@ CREATE TABLE IF NOT EXISTS `reaccion` (
 -- Estructura de tabla para la tabla `rol`
 --
 
-DROP TABLE IF EXISTS `rol`;
-CREATE TABLE IF NOT EXISTS `rol` (
+CREATE TABLE `rol` (
   `id_rol` int(11) NOT NULL,
-  `rol` varchar(35) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id_rol`)
+  `rol` varchar(35) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -185,25 +171,25 @@ INSERT INTO `rol` (`id_rol`, `rol`) VALUES
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuario` (
+  `id_usuario` int(11) NOT NULL,
   `nombre` varchar(45) COLLATE utf8_bin NOT NULL,
   `correo` varchar(50) COLLATE utf8_bin NOT NULL,
   `password` varchar(45) COLLATE utf8_bin NOT NULL,
   `activo` int(11) NOT NULL,
   `dias` int(11) NOT NULL,
-  `id_rol` int(11) NOT NULL,
-  PRIMARY KEY (`id_usuario`),
-  KEY `id_rol` (`id_rol`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `id_rol` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `correo`, `password`, `activo`, `dias`, `id_rol`) VALUES
-(1, 'Isabel', 'isa_ol@ol.com', '123', 1, 0, 4);
+(1, 'Isabel', 'isa_ol@ol.com', '123', 1, 0, 1),
+(3, 'Elizabeth', 'user@example.com', '123', 0, 0, 3),
+(4, 'Juan', 'juan@gmail.com', 'juanito', 0, 0, 1),
+(5, 'Angel Emmanuel', 'angeli@usuario.com', 'angel123', 1, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -211,11 +197,9 @@ INSERT INTO `usuario` (`id_usuario`, `nombre`, `correo`, `password`, `activo`, `
 -- Estructura de tabla para la tabla `valoracion`
 --
 
-DROP TABLE IF EXISTS `valoracion`;
-CREATE TABLE IF NOT EXISTS `valoracion` (
+CREATE TABLE `valoracion` (
   `id_valoracion` int(11) NOT NULL,
-  `valoracion` varchar(35) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id_valoracion`)
+  `valoracion` varchar(35) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -224,7 +208,118 @@ CREATE TABLE IF NOT EXISTS `valoracion` (
 
 INSERT INTO `valoracion` (`id_valoracion`, `valoracion`) VALUES
 (0, 'Rechazada'),
-(1, 'Aprobada');
+(1, 'Aprobada'),
+(2, 'Proceso');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `archivos`
+--
+ALTER TABLE `archivos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id_categoria`);
+
+--
+-- Indices de la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  ADD PRIMARY KEY (`folio`);
+
+--
+-- Indices de la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  ADD PRIMARY KEY (`id_notificacion`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `publicacion`
+--
+ALTER TABLE `publicacion`
+  ADD PRIMARY KEY (`id_publicacion`),
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_categoria` (`id_categoria`),
+  ADD KEY `id_valoracion` (`id_valoracion`) USING BTREE;
+
+--
+-- Indices de la tabla `reaccion`
+--
+ALTER TABLE `reaccion`
+  ADD PRIMARY KEY (`id_reaccion`),
+  ADD KEY `id_publicacion` (`id_publicacion`);
+
+--
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`id_rol`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD KEY `id_rol` (`id_rol`);
+
+--
+-- Indices de la tabla `valoracion`
+--
+ALTER TABLE `valoracion`
+  ADD PRIMARY KEY (`id_valoracion`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `archivos`
+--
+ALTER TABLE `archivos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  MODIFY `folio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `notificacion`
+--
+ALTER TABLE `notificacion`
+  MODIFY `id_notificacion` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `publicacion`
+--
+ALTER TABLE `publicacion`
+  MODIFY `id_publicacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT de la tabla `reaccion`
+--
+ALTER TABLE `reaccion`
+  MODIFY `id_reaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=805;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas

@@ -23,6 +23,11 @@
     <script src="js/bien.js"></script>
     <script src="js/regular.js"></script>
     <script src="js/mala.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ 
   </head>  
   <body>   
 
@@ -34,8 +39,9 @@
 		<?php 
 		require "conexion.php";
 		//print_r($conn->errorInfo()) ; die();
-		$sqlA = $conn->prepare("SELECT * FROM publicacion ORDER BY id_publicacion DESC");
+		$sqlA = $conn->prepare("SELECT * FROM publicacion where id_valoracion=1 ORDER BY id_publicacion DESC");
 		$sqlA->execute();
+		
 		//$data=$query->fetch(PDO::FETCH_ASSOC)
 		while($rowA = $sqlA->fetch()) {//selecciona publicacion a publicacion de forma descendente
 			$sqlB = $conn->prepare("SELECT * FROM usuario WHERE id_usuario = '".$rowA['id_usuario']."'");//verifica qu ecoincida el ide de usuario que publico con algun usuario en la tabla usuarios

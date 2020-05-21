@@ -90,8 +90,8 @@ include "functions.php";
           $sqlCat = $conn->prepare('SELECT titulo FROM categoria');
           $sqlCat->execute();
 
-          while($rowCAT = $sqlCat->fetch(PDO::FETCH_ASSOC)){
-            echo "<option>".$rowCAT["titulo"]."</option>";
+          while($rowCAT = $sqlCat->fetch()){
+            echo "<option>".$rowCAT['titulo']."</option>";
           }
         ?>
     </select>
@@ -130,8 +130,12 @@ if (isset($_POST['submit'])) {
   //$descripcion = $mysqli->real_escape_string($_POST['descripcion']);
     $descripcion = $conn->quote($_POST['descripcion']); //Quitar caracteres no deseados para agregar a la BD
     $titulo = $conn->quote($_POST['titulo']); //Quitar caracteres no deseados para agregar a la BD
-    $categoria = $conn->quote($_POST['categoria']); //Quitar caracteres no deseados para agregar a la BD
-
+    $categoria =$_POST['categoria']; //Quitar caracteres no deseados para agregar a la BD
+    //Agrega el id_categoria
+    $ID_C = $conn->prepare("SELECT id_categoria FROM categoria WHERE titulo = '$categoria'");
+    $ID_C->execute(); 
+    $CAT = $ID_C->fetch();
+    $id_categoria = $CAT['id_categoria'];
     
     if(is_uploaded_file($_FILES['file-input']['tmp_name'])) { 
 
@@ -195,9 +199,9 @@ if (isset($_POST['submit'])) {
           $fecha = (new \DateTime())->format('Y-m-d H:i:s');
 
           //Agrega la publicacion
-          $queryPub =  "INSERT INTO publicacion (titulo,categoria,foto,texto,id_usuario,bien,regular,mal,fecha) VALUES (?,?,?,?,?,?,?,?,?)";//query para registrar publicacion
+          $queryPub =  "INSERT INTO publicacion (titulo,categoria,foto,texto,id_usuario,id_categoria,bien,regular,mal,id_valoracion,fecha) VALUES (?,?,?,?,?,?,?,?,?,?,?)";//query para registrar publicacion
           $stmt= $conn->prepare($queryPub);
-          $stmt->execute([$titulo,$categoria,$defau,$descripcion,$id_us,$defau,$defau,$defau,$fecha]);
+          $stmt->execute([$titulo,$categoria,$defau,$descripcion,$id_us,$id_categoria,$defau,$defau,$defau,2,$fecha]);
 
           $ultpub = $conn->prepare("SELECT id_publicacion FROM publicacion WHERE id_usuario = '".$_SESSION['id_usuario']."' ORDER BY id_publicacion DESC LIMIT 1");
           $ultpub->execute(); 

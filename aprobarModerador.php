@@ -23,18 +23,22 @@
     </head>
     <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-    <li class="nav-item ">
-      <a class="nav-link" href="admin.php">Estadistica de usuarios</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-link" href="aprobarModerador.php">Aprobar Moderador</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="cerrarsesion.php">Salir</a>
-    </li>
-    
+    <ul class="navbar-nav">
+      <li class="nav-item ">
+        <a class="nav-link" href="admin.php">Usuarios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="admin.php">Reportes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="aprobarModerador.php">Aprobar Moderador</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="temas.php">Temas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="cerrarsesion.php">Salir</a>
+      </li>
   </ul>
 </nav>
 <h1>Administrador</h1>
@@ -60,7 +64,7 @@
                     echo "<td>".$res['nombre']."</td>";
                     echo "<td>".$res['correo']."</td>";
                     
-                    echo "<td><a href='aceptar.php?id=$res[id_usuario]'><button type='button' class='btn btn-success'>Aceptar</button></td>"; //boton editar, al dar clic manda al archivo editar.php mandando el id del registro que se va editar	                             
+                    echo "<td><a href='aceptar.php?id=$res[id_usuario]'><button type='button' class='btn btn-success'>Aceptar</button></a></td>"; //boton editar, al dar clic manda al archivo editar.php mandando el id del registro que se va editar	                             
                     
                     echo "<td><a href='rechazar.php?id_usuar=$res[id_usuario]'> <button type='button' class='btn btn-danger'>Rechazar</button></a></td>";		
                     echo "</tr>";  

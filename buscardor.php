@@ -1,13 +1,17 @@
-
-
-
-
-<!-- CREO ISABEL -->
-<div class="h-header" style="padding: 70px;">
-	<div class="h-logo"><a href="registrado.php"><img src="img/logo2.png" width="130"></a></div>
-	<div class="h-search">
-	
-	<section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ 
+</head>
+<body>
+<section>
   <div>
   <!--<h1>Buscar</h1>-->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -19,6 +23,10 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Usuario</a>
+  </li>
+
+  <li class="nav-item">
+    <a  class="nav-link "  href="registrado.php"   aria-selected="false">Inicio</a>
   </li>
 </ul>
 
@@ -50,16 +58,5 @@
 
   </div>
 </section>
-	
-	
-	
-	
-	</div>
-	<div class="h-account">
-		<a href="registrado/subir.php"><img src="img/icons/mas.png" width="50" title ="Sube una foto ó video" ></a>
-		<a href="registrado/perfil.php?nombre=<?php echo $_SESSION['nombre'];?>">
-			<img src="img/icons/perfil.png" class="i-icon">
-		</a>
-		<a href="registrado.php"><img src="img/logo2.png" width="130"></a>
-	</div>
-</div>
+</body>
+</html>

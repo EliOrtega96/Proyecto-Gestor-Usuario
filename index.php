@@ -53,7 +53,7 @@
             <h1 class="titulo" >Gestor de Usuario</h1>     
             <nav>
             <ul>
-                <li><a href="index.php">Inicio</a></li>
+                <li><a href="registrado.php">Inicio</a></li>
                 <li class="info_usuario"><a href="#"><?php echo $_SESSION['nombre'];?></a>
                 <ul id="nav-perfil">
                     <li> <a href="cerrarsesion.php">Cerrar Sesion</a></li>

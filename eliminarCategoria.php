@@ -8,5 +8,5 @@
    $user = "DELETE FROM categoria WHERE id_categoria='$id_categoria' ";   //query para eliminar el usuario que se va eliminar
     $conn->exec($user); //ejecuta el query
 
-    header("Location: moderador.php");  //una vez eliminado redirecciona a index.
+    header("Location: temas.php");  //una vez eliminado redirecciona a index.
 ?>

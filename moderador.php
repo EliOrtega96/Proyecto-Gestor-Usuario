@@ -1,83 +1,86 @@
+<?php
+    require_once('conexion.php'); //incluye en archivo conexion DB
+
+    $query = $conn->prepare("select p.id_publicacion, p.titulo,p.categoria,p.texto, u.nombre, c.ruta
+    from publicacion p inner join usuario u on p.id_usuario = u.id_usuario
+    inner join archivos c on p.id_publicacion = c.publicacion where p.id_valoracion = 2");   //lee todos los usuarios de la tabla categpria
+    $query->execute(); //ejecuta el query
+    
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8 /> 
-        <link rel="stylesheet" type="text/css" href="#">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="#">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
-        
-        <title> Registro </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <title> Publicaciones </title>
+        <style>
+            img{
+                width: 250px;
+                height: 150px;
+                margin-top:20px;
+            }
+        </style>
     </head>
-
-
-
-
-<body>
-    
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-    <li class="nav-item ">
-      <a class="nav-link" href="moderador.php">Crear Categoria.</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-link" href="aprobarPublicacion.php">Aprobar Publicacion</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="cerrarsesion.php">Salir</a>
-    </li>
-    
+    <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item ">
+        <a class="nav-link" href="moderador.php">Publicaciones</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="cerrarsesion.php">Salir</a>
+      </li>
+      
   </ul>
 </nav>
 <h1>Moderador</h1>
-<div class="container">
-  <h2 style="text-align:center">Registrar Categoria</h2>
-  <div class="row">     
-    <form method="post" action="registrarCategoria.php"> 
-      <div class="form-group">
-        <label for="exampleInput">Titulo</label>
-        <input type="text" required class="form-control" id="exampleInput" name="titulo" aria-describedby="emailHelp" placeholder="Nombre de Categoria">
-      </div>
-     
-      <button type="submit" class="btn btn-primary">Crear</button>
-    </form>
-  </div>     
-</div>
 
-<div class="container">
-    <h2 style="text-align:center">Temas registrados</h2>
-<div class="container">
-   <div class="row">
-        <table style="width: 100%;"> <!-- tabla de usuarios registrados -->
-            <thead>
-                <tr>
-                    
-                    <td>Titulo</td>
-                    
-                </tr>
-                <?php 
-                require_once('conexion.php'); //incluye en archivo conexion DB
-
-                $query = $conn->prepare("SELECT * FROM categoria ");   //lee todos los usuarios de la tabla categpria
-                $query->execute(); //ejecuta el query
-                while($res = $query->fetch()) { 		
-                    echo "<tr>";
-                    echo "<td>".$res['titulo']."</td>"; //nombre de los campos de la base de datos.
-                    echo "<td><a href='eliminarCategoria.php?categoria=$res[id_categoria]'> <button type='button' class='btn btn-danger'>Eliminar</button></a></td>";		
-                    echo "</tr>"; 
-                   
-                    
-                    
-                    
+    <h2 style="text-align:center">Publicaciones</h2>
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">img</th>
+                        <th scope="col">contenido</th>
+                        <th scope="col">Creador</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Aprobar</th>
+                        <th scope="col">Rechazar</th>
+                    </tr>
+                </thead>
+            <body>
                 
-                     
-                    
-                }
-            ?>
-            </thead>
-       
-            </table>
+                <?php 
+                        while($res = $query->fetch()) 
+                        {  
+                            $img = $res['ruta'];
+                            echo "<tr>";
+                            echo "<td>".$res['id_publicacion']."</td>";   
+                            echo "<td>".$res['titulo']."</td>";
+                            echo "<td>"."<img src='archivos/$img' >"."</td>";
+                            echo "<td>".$res['texto']."</td>";
+                            echo "<td>".$res['nombre']."</td>";
+                            echo "<td>".$res['categoria']."</td>";
+                            echo "<td><a href='aceptarPublicacion.php?id=$res[id_publicacion]'><button type='button' class='btn btn-success'>Aceptar</button></a></td>"; //boton editar, al dar clic manda al archivo editar.php mandando el id del registro que se va editar	                             
+                            echo "<td> <button type='button' class='btn btn-danger' >Rechazar</button></td>";		
+                            echo "<hr></tr>";
+
+
+
+                        }
+                ?>   
+
+
+              
+            </body>      
+           </table>
         </div>
     </div>
     </body>

@@ -6,7 +6,7 @@
         $queryUser = "INSERT INTO categoria (titulo) VALUES('$titulo')";  //query para registrar 
         $conn->exec($queryUser); //ejecuta query
         
-        header('Location: moderador.php');  // despues de registrar redirecciona a login.php
+        header('Location: temas.php');  // despues de registrar redirecciona a login.php
     }
 
    
