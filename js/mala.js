@@ -12,12 +12,15 @@ $(document).ready(function() {
 			data: {id:id,tip},
 			dataType: 'json',
 			success: function(data) {
-				var img = data['img'];
+				let postId = id.replace(/\D/g,'');/*Obtenemos el ID*/
+				$("#conteo").load('contarReacciones.php',{postId});/*Actualizamos el conteo que aparece abajo de los emojis*/
+				$("#reaccionesP").load('ActualizaReaccion.php',{postId});/*Actualizamos la reaccion de los emojis (cuando busca por usuario)*/
+				$("#reaccionesPP").load('ActualizaReaccionPrinc.php',{postId});/*Actualizamos la reaccion de los emojis en la pagina principal (registrado.php)*/
 
-					$('#'+id).html(img);
+				var img = data['img'];
+				$('#'+id).html(img);
+
 			}
 		});
-
 	});
-
 });

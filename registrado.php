@@ -1,4 +1,3 @@
-<!-- CREO ISABEL -->
 <?php //No llamo a la base de datos porque ya cree una session
 
 	include "index.php";
@@ -24,10 +23,10 @@
     <script src="js/regular.js"></script>
     <script src="js/mala.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
- 
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
   </head>  
   <body>   
 
@@ -52,7 +51,6 @@
 			$rowC = $sqlC->fetch();	
 
 		?>
-
 			<div class="hl-cont">
 				<div class="hl-top">
 					<div class="hl-profile">
@@ -66,7 +64,7 @@
 				<div class="hl-middle">
 					<img src="archivos/<?php echo $rowC['ruta']; ?>" style = "height: 10%; ">
 				</div>	
-				<div class="hl-section-likes">
+				<div id = "reaccionesPP" class="hl-section-likes">
 					<!--BIEN -->
 					<?php 
 					
@@ -130,7 +128,7 @@
 
 				</div>
 				<!--Muestra el conteo de reacciones -->
-				<div class="hl-bottom">
+				<div class="hl-bottom" id="conteo">
 					<?php
 						$CReac = $conn->prepare("SELECT bien,regular,mal FROM publicacion WHERE id_publicacion = '".$rowA['id_publicacion']."'");
 						$CReac->execute();

@@ -1,4 +1,3 @@
-<!-- CREO ISABEL -->
 <?php
 session_start();
 
@@ -55,9 +54,9 @@ $t= $tipoA->fetch();
 $tipo_r = $t[0];
 
 if($cLike == 0 || $tipo_r == 2) {
-	$regularP = "<img src='img/icons/me_gusta2.png'>";
+	$regularP = "<img src='img/icons/me_gusta2.png' style ='height: 40px; width: 40px; padding-top: 10px; padding-right: 15px;'>";
 }else {
-	$regularP = "<img src='img/icons/me_gusta.png'>";
+	$regularP = "<img src='img/icons/me_gusta.png' style ='height: 40px; width: 40px; padding-top: 10px; padding-right: 15px;'>";
 }
 
 $return2 = array("img"=>$regularP);

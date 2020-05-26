@@ -1,4 +1,3 @@
-<!-- CREO ISABEL -->
 <?php
 session_start();
 
@@ -55,13 +54,12 @@ $t= $tipoA->fetch();
 $tipo_r = $t[0];
 
 if($cLike == 0 || $tipo_r == 1) {
-	$bienR = "<img src='img/icons/cora2.png'>";
+	$bienR = "<img src='img/icons/cora2.png' style ='height: 40px; width: 40px; padding-top: 10px; padding-right: 15px;'>";
 }else {
-	$bienR = "<img src='img/icons/cora.png'>";
+	$bienR = "<img src='img/icons/cora.png' style ='height: 40px; width: 40px; padding-top: 10px; padding-right: 15px;'>";
 }
 
 $return1 = array("img"=>$bienR);
 
 echo json_encode($return1);
 ?>
-
