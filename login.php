@@ -16,6 +16,7 @@
        <input  type="password" name="password" class="input-control"  placeholder="Contraseña:">
        
        <input type="submit" value="Iniciar Sesion"  name="registrar" class="log-btn">
+       <a href="registro.php">Registrarse</a>
        </form>
       
        
