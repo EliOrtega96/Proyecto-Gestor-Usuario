@@ -1,8 +1,3 @@
-
-
-
-
-<!-- CREO ISABEL -->
 <div class="h-header" style="padding: 70px;">
 	<div class="h-logo"><a href="registrado.php"><img src="img/logo2.png" width="130"></a></div>
 	<div class="h-search">

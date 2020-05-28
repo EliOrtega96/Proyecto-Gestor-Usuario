@@ -46,23 +46,7 @@ include "functions.php";
 			</div>
 			
 			<div class="p-user"><?php echo $rowA['nombre'];?></div>
-			<?php if($rowA['id_usuario'] == $_SESSION['id_usuario']) { ?>
-			<!--Editar perfil -->
-			<div class="p-editar"><a href="editar_perfil.php"><button class="button_white">Editar perfil</button></a></div>
-			<?php } else { ?>
-
-			<?php if($tAprobo == 0) { ?>
-
-				<?php if($yaEnviaste > 0) { ?>
-					<div class="p-editar"><button class="button_blue">Solicitud enviada</button></div>
-				<?php } else { ?>
-					<a href="?seguir=seguir&username=<?php echo $_GET['nombre']; ?>"><div class="p-editar"><button class="button_blue">Seguir</button></div></a>
-				<?php } ?>
-
-			<?php } ?>
-
-			<?php } ?>
-		</div>
+			</div>
 		<div class="p-info">
 			<div class="p-infor"><b><?php echo $totalp; ?></b> publicaciones</div>
 		</div>
@@ -79,7 +63,9 @@ include "functions.php";
 			$sqlD->execute(); 
 			$rowD = $sqlD->fetch();
 		?>
-			<div class="p-pub" style="background-image: url('../archivos/<?php echo $rowD['ruta']; ?>');"></div>
+			<div class="p-pub">
+				<img src="../archivos/<?php echo $rowD['ruta']; ?>" style = "height: 10%; width: 20%">
+			</div>
 		<?php } ?>
 
 

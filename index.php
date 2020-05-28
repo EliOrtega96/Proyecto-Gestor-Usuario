@@ -4,7 +4,7 @@
     require("conexion.php");
      //CAMBIOS ISABEL
     if(!isset($_SESSION['logueado']) && $_SESSION['logueado'] == FALSE) {
-          header("Location: login.php");
+        header("Location: Principal.php");
     }
     //TERMINA CAMBIOS ISABEL
     $obtienemsj = $conn->prepare("SELECT mensajes.fechayhora, mensajes.id_emisor, mensajes.mensaje, usuario.nombre FROM mensajes inner join usuario WHERE id_receptor=$_SESSION[id_usuario] && mensajes.id_emisor=usuario.id_usuario ORDER BY fechayhora DESC") ; //query para obtener usuario con correo y contraseña ingresados en formulario login.php
