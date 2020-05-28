@@ -221,7 +221,7 @@ if (isset($_POST['submit'])) {
         }  
     }  
 
-     else {echo "<script type='text/javascript'>alert('Solo puedes subir imágenes');</script>";}
+     else {echo "<script type='text/javascript'>alert('Imagen no compatible');</script>";}
      
  } 
 ?> 

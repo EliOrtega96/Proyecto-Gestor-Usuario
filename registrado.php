@@ -62,7 +62,7 @@
 						<div class="hl-titulo1"><a style="color: rgb(176,196,222);"><?php echo "Titulo: ".$rowA['titulo']; ?></a></div> <!-- Muestro el ttulo de la publicacion-->
 					</div>	
 				<div class="hl-middle">
-					<img src="archivos/<?php echo $rowC['ruta']; ?>" style = "height: 10%; ">
+					<img src="archivos/<?php echo $rowC['ruta']; ?>" style = "height: 100%; width: 100%">
 				</div>	
 				<div id = "reaccionesPP" class="hl-section-likes">
 					<!--BIEN -->

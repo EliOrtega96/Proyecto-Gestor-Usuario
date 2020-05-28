@@ -57,7 +57,7 @@
 						<div class="hl-titulo2"><a style="color: rgb(176,196,222);"><?php echo "Titulo: ".$rowA['titulo']; ?></a></div> <!-- Muestro el ttulo de la publicacion-->
 				</div>	
 				<div class="hl-middle">
-					<img src="archivos/<?php echo $rowC['ruta']; ?>" style = "height: 10%; ">
+					<img src="archivos/<?php echo $rowC['ruta']; ?>" style = "height: 100%; width: 100%"	>
 				</div>		
 				<!--Descripcion de la publicacion-->	
 				<div class="hl-bottom">
