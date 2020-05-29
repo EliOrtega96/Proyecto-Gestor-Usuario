@@ -70,32 +70,7 @@ require_once("conexion.php");
 
     </script>
 
-     <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Bien', 'Regular', 'Mal'],
-          ['2014', 100, 40, 20],
-          ['2015', 170, 40, 50],
-          ['2016', 60, 120, 30],
-          ['2017', 130, 54, 35]
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Publicaciones',
-            subtitle: 'Grafica de cada publicacion con sus reacciones',
-          },
-          bars: 'horizontal' // Required for Material Bar Charts.
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('valoracion'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
+    
   </head>
   <body>
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -126,10 +101,7 @@ require_once("conexion.php");
             <div id="temas" style="width: 600px; height: 500px;"></div>
             </div>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <center>  <div id="valoracion" style="width: 60%; height: 500px;"></div></center>
-          </div>
+       
         </div>
     </div>
   </body>
