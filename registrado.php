@@ -1,7 +1,8 @@
 <?php //No llamo a la base de datos porque ya cree una session
 
 	include "index.php";
-	//session_start();
+
+	$usuarioLogueado = $_SESSION['id_usuario'];
 	if(!isset($_SESSION['logueado']) && $_SESSION['logueado'] == FALSE) {
 		  header("Location: login.php");
 	}
@@ -38,7 +39,11 @@
 		<?php 
 		require "conexion.php";
 		//print_r($conn->errorInfo()) ; die();
-		$sqlA = $conn->prepare("SELECT * FROM publicacion where id_valoracion=1 ORDER BY id_publicacion DESC");
+		//$sqlA = $conn->prepare("SELECT * FROM publicacion where id_valoracion=1 ORDER BY id_publicacion DESC");
+		$sqlA = $conn->prepare("SELECT p.id_publicacion,p.titulo, p.categoria, p.texto, c.titulo as categoria,
+		u.nombre, f.id_categoria, u.id_usuario FROM `publicacion` p inner join categoria c on p.id_categoria = c.id_categoria
+		inner join usuario u on p.id_usuario = u.id_usuario 
+		inner join favorito f on f.id_categoria = c.id_categoria where p.id_valoracion = 1 and f.id_usuario = 	$usuarioLogueado  ORDER BY id_publicacion DESC");
 		$sqlA->execute();
 		
 		//$data=$query->fetch(PDO::FETCH_ASSOC)
