@@ -21,7 +21,7 @@
 
             switch($_SESSION['rol']){
                 case 1:
-                    header('location: registrado.php');
+                    header('location: selectopic.php');
                 break;
     
                 case 2: 
