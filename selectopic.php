@@ -57,17 +57,8 @@
             
           }
         }
-        
-          
-            
-            
              $cont=1; while ($row=$obtienecategoria->fetch(PDO::FETCH_ASSOC)){    
                 $valor = $row['id_categoria'];
-             
-               
-                   // echo "<h2><input type=\"checkbox\" name=\"cbox$cont\" value=".$row["titulo"].">".$row["titulo"]."</h2>";$cont=$cont+1;
-                 // este es el bueno  echo "<h2><input type=\"checkbox\" name=\"cbox[]\" value=".$row["id_categoria"].">".$row["titulo"]."</h2>";$cont=$cont+1;
-                  // echo "input type=\"text\" name=\"id\"" 
                 
            }?>
           
