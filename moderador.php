@@ -1,6 +1,5 @@
 <?php
     require_once('conexion.php'); //incluye en archivo conexion DB
-
     $query = $conn->prepare("select p.id_publicacion, p.titulo,p.categoria,p.texto, u.nombre, c.ruta
     from publicacion p inner join usuario u on p.id_usuario = u.id_usuario
     inner join archivos c on p.id_publicacion = c.publicacion where p.id_valoracion = 2");   //lee todos los usuarios de la tabla categpria
@@ -69,16 +68,10 @@
                             echo "<td>".$res['nombre']."</td>";
                             echo "<td>".$res['categoria']."</td>";
                             echo "<td><a href='aceptarPublicacion.php?id=$res[id_publicacion]'><button type='button' class='btn btn-success'>Aceptar</button></a></td>"; //boton editar, al dar clic manda al archivo editar.php mandando el id del registro que se va editar	                             
-                            echo "<td> <button type='button' class='btn btn-danger' >Rechazar</button></td>";		
+                            echo "<td><a href='rechazarPublicacion.php?id=$res[id_publicacion]'><button type='button' class='btn btn-danger' >Rechazar</button></td>";		
                             echo "<hr></tr>";
-
-
-
                         }
-                ?>   
-
-
-              
+                ?>      
             </body>      
            </table>
         </div>
